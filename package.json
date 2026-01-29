@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-pdf": "ts-node generate-pdf.ts"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -19,6 +20,8 @@
   "devDependencies": {
     "typescript": "^5.2.0",
     "@types/react": "^18.2.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "puppeteer": "^21.0.0",
+    "ts-node": "^10.9.0"
   }
 }
