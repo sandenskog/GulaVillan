@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sumdog - Evidence-Based Learning Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hanken Grotesk', sans-serif;
+      line-height: 1.6;
+      color: #0f172a;
+      background: #ffffff;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #153c66;
+    }
+
+    .logo-icon {
+      width: 2rem;
+      height: 2rem;
+      background: #153c66;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      color: #153c66;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #b71f67;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #153c66 0%, #1e5a96 100%);
+      color: white;
+      padding: 6rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #dbeafe;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #b71f67;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #9b1854;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #153c66;
+    }
+
+    .btn-secondary:hover {
+      background: #f0f9ff;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #dbeafe;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 4rem 1rem;
+    }
+
+    section.light {
+      background: #f8fafc;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #153c66;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #4b5563;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+      transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      color: #153c66;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: #4b5563;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .card-stat {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card-stat-value {
+      font-weight: 700;
+      color: #153c66;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-stat-label {
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    /* Two Column Section */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .feature-content h4 {
+      color: #153c66;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-content p {
+      color: #4b5563;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #f0f4ff 0%, #ffe7f4 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      border: 2px dashed #b71f67;
+    }
+
+    .highlight-item {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      border-left: 4px solid #b71f67;
+      margin-bottom: 1rem;
+    }
+
+    .highlight-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-item-value {
+      font-weight: 700;
+      color: #153c66;
+      margin-bottom: 0.25rem;
+    }
+
+    .highlight-item-label {
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    /* CTA Section */
+    .cta {
+      background: #153c66;
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .cta p {
+      color: #dbeafe;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn-cta {
+      background: #b71f67;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-cta:hover {
+      background: #9b1854;
+    }
+
+    .cta-contact {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+      color: #dbeafe;
+    }
+
+    .cta-contact a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+    }
+
+    .cta-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background: #153c66;
+      color: white;
+      padding: 3rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: #dbeafe;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+      }
+
+      header {
+        position: static;
+      }
+
+      section, .cta, footer {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <span>Sumdog</span>
+      </div>
+      <nav>
+        <a href="#evidence">Evidence</a>
+        <a href="#features">Features</a>
+        <a href="#accessibility">Accessibility</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Learning Platform Redesigned by Evidence</h1>
+      <p>Discover how our efficacy study transformed our platform to deliver better outcomes for every learner. Evidence-based design meets engaging learning.</p>
+
+      <div class="hero-buttons">
+        <button class="btn btn-primary">Start Free Trial for Schools</button>
+        <button class="btn btn-secondary">Start Free Trial for Families</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">2x+</div>
+          <div class="stat-label">Progress for SEN pupils with accessibility features</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Teachers found strategic friction valuable</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">WCAG 2.1 AA accessibility compliance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Efficacy Findings -->
+  <section id="evidence" class="light">
+    <div class="container">
+      <h2>Evidence-Based Design</h2>
+      <p class="section-subtitle">Every feature in Sumdog is informed by our England efficacy study. Here's what we learned about effective learning platforms.</p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Engagement Without Compromise</h3>
+          <p>Gamification drives enthusiasm, but our strategic friction features ensure pupils focus on accuracy. The "Don't Rush" prompt proved highly effective.</p>
+          <div class="card-stat">
+            <div class="card-stat-value">85% of teachers</div>
+            <div class="card-stat-label">found friction features valuable for refocusing attention</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Invisible Differentiation</h3>
+          <p>Adaptive difficulty works best when students remain unaware. Our intelligent system adjusts seamlessly without signposting.</p>
+          <div class="card-stat">
+            <div class="card-stat-value">Highest engagement</div>
+            <div class="card-stat-label">when pupils perceive equal challenge levels</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">♿</div>
+          <h3>Accessibility at the Core</h3>
+          <p>Customizable timers and non-timed game modes are essential. SEN pupils showed 2x+ progress when given these options.</p>
+          <div class="card-stat">
+            <div class="card-stat-value">2x+ progress</div>
+            <div class="card-stat-label">for SEN pupils with accessibility features</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3>Curriculum Alignment</h3>
+          <p>Teachers report faster adoption when content aligns with established schemes like White Rose. Less friction in implementation.</p>
+          <div class="card-stat">
+            <div class="card-stat-value">Faster adoption</div>
+            <div class="card-stat-label">with aligned curriculum mapping</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features">
+    <div class="container">
+      <h2>Key Features Informed by Research</h2>
+      <p class="section-subtitle">Six evidence-based features designed to improve pupil outcomes.</p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">⏸️</div>
+          <h3>Strategic Friction</h3>
+          <p>"Don't Rush" prompts encourage careful problem-solving. Proven to improve accuracy without reducing engagement.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Invisible Adaptation</h3>
+          <p>Difficulty adjusts based on performance. Pupils never feel they're receiving different content—reducing anxiety.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">♿</div>
+          <h3>Customizable Timers</h3>
+          <p>Choose from multiple timer lengths or no timer. Essential for SEN pupils and those with anxiety.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <h3>Non-Timed Modes</h3>
+          <p>Dedicated games with no timer pressure. Builds confidence and allows learners to work at their own pace.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Real-Time Analytics</h3>
+          <p>Teachers see detailed progress and accuracy data. Curriculum-aligned insights inform teaching decisions.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Curriculum Mapping</h3>
+          <p>Aligned with White Rose, Maths Mastery, and other schemes. Reduces implementation friction for schools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- School Section -->
+  <section class="light">
+    <div class="container">
+      <div class="two-column">
+        <div>
+          <h2>For Schools & Teachers</h2>
+          <p style="color: #4b5563; font-size: 1.1rem; margin-bottom: 1.5rem;">Transform your maths and English teaching with evidence-backed tools that actually work.</p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">📈</div>
+              <div class="feature-content">
+                <h4>Real Progress Tracking</h4>
+                <p>Detailed analytics show where each pupil excels and where they need support</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">⚙️</div>
+              <div class="feature-content">
+                <h4>Teacher Control</h4>
+                <p>Configure friction levels, timer options, and difficulty per pupil or class</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🎯</div>
+              <div class="feature-content">
+                <h4>Curriculum Alignment</h4>
+                <p>Seamlessly integrate with your existing maths schemes and curricula</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">👥</div>
+              <div class="feature-content">
+                <h4>Inclusive by Design</h4>
+                <p>Support SEN pupils, vulnerable learners, and those with anxiety</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="highlight-box">
+            <h3 style="color: #153c66; margin-bottom: 1.5rem;">Impact from Our Study</h3>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">95% of teachers</div>
+              <div class="highlight-item-label">found strategic friction valuable for improving accuracy</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Fastest adoption</div>
+              <div class="highlight-item-label">when curriculum aligned with schools' existing schemes</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Teachers praised</div>
+              <div class="highlight-item-label">the intuitive interface requiring minimal training</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">100% engagement</div>
+              <div class="highlight-item-label">maintained with strategic friction features</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Section -->
+  <section>
+    <div class="container">
+      <div class="two-column">
+        <div>
+          <div class="highlight-box">
+            <h3 style="color: #153c66; margin-bottom: 1.5rem;">For Students & Families</h3>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">No Rush Required</div>
+              <div class="highlight-item-label">Take your time and focus on getting it right</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Customizable Timers</div>
+              <div class="highlight-item-label">Choose what works for you—or no timer at all</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Learning at Your Pace</div>
+              <div class="highlight-item-label">Difficulty adjusts without you noticing</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Non-Timed Games</div>
+              <div class="highlight-item-label">Explore and learn without pressure</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2>Mindful Learning, Not Rush Culture</h2>
+          <p style="color: #4b5563; font-size: 1.1rem; margin-bottom: 1.5rem;">Our research showed that pressure to rush actually reduces accuracy. We redesigned everything to encourage thoughtful, careful problem-solving.</p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">🧠</div>
+              <div class="feature-content">
+                <h4>Thoughtful Problem-Solving</h4>
+                <p>Take your time to think through problems carefully</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">😌</div>
+              <div class="feature-content">
+                <h4>Reduced Anxiety</h4>
+                <p>No timer pressure means learning can be enjoyable</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🎮</div>
+              <div class="feature-content">
+                <h4>Fun & Engaging</h4>
+                <p>Gamification without the stress</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">📈</div>
+              <div class="feature-content">
+                <h4>Better Results</h4>
+                <p>Careful thinking leads to better accuracy and real learning</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accessibility Section -->
+  <section id="accessibility" class="light">
+    <div class="container">
+      <h2>Accessibility for All Learners</h2>
+      <p class="section-subtitle">Our efficacy study revealed that customizable timers and non-timed options significantly improved outcomes for SEN pupils.</p>
+
+      <div class="two-column">
+        <div>
+          <h3 style="color: #153c66; margin-bottom: 1.5rem; font-size: 1.5rem;">Core Accessibility Features</h3>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">⏲️</div>
+              <div class="feature-content">
+                <h4>Customizable Timers</h4>
+                <p>Choose from multiple timer lengths or use no timer at all. SEN pupils showed 2x+ progress when given timer options.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🎮</div>
+              <div class="feature-content">
+                <h4>Non-Timed Game Modes</h4>
+                <p>Let pupils work at their own pace with dedicated non-timed games. Perfect for building confidence and reducing anxiety.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">👁️</div>
+              <div class="feature-content">
+                <h4>Clear Visual Feedback</h4>
+                <p>Large, readable text. High contrast. Color-blind safe. Keyboard navigation. Full screen reader support.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">📈</div>
+              <div class="feature-content">
+                <h4>Flexible Difficulty</h4>
+                <p>Start where learners are. Progress invisibly. No embarrassment. Automatic adjustment based on performance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="highlight-box">
+            <h3 style="color: #153c66; margin-bottom: 1.5rem;">Why Accessibility Matters</h3>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">2x+ Progress</div>
+              <div class="highlight-item-label">SEN pupils who used customizable timer options</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">100% WCAG 2.1 AA</div>
+              <div class="highlight-item-label">Full accessibility compliance</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Universal Design</div>
+              <div class="highlight-item-label">Benefits all learners, not just those with identified needs</div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-item-value">Teacher Configurable</div>
+              <div class="highlight-item-label">Set options per pupil, class, or whole school</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to See Evidence-Based Results?</h2>
+      <p>Start a free trial and experience the same evidence-backed features and strategic design that improved pupil progress in our efficacy study.</p>
+
+      <div class="cta-buttons">
+        <button class="btn-cta">Start Free Trial for Schools</button>
+        <button class="btn-cta">Start Free Trial for Families</button>
+      </div>
+
+      <div class="cta-contact">
+        <p style="margin-bottom: 1rem;">Questions?</p>
+        <a href="mailto:support@sumdog.com">support@sumdog.com</a>
+        <span>•</span>
+        <a href="tel:01312261511">0131 226 1511</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Sumdog</h3>
+        <p style="font-size: 0.9rem; color: #dbeafe; margin-bottom: 1rem;">Evidence-based learning for every child.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>For Schools</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Case Studies</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>For Families</h3>
+        <ul>
+          <li><a href="#">Home Learning</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Get Started</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="mailto:support@sumdog.com">support@sumdog.com</a></li>
+          <li><a href="tel:01312261511">0131 226 1511</a></li>
+          <li><a href="#">Help Centre</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Sumdog. All rights reserved.</p>
+      <div>
+        <a href="#" style="margin-right: 1rem;">Privacy Policy</a>
+        <a href="#" style="margin-right: 1rem;">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
